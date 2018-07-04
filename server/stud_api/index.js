@@ -28,6 +28,14 @@ var studclss_services=require('../stud_api/create_class/services');
 app.get("/getstudclssDetail",studclss_services.getstudclssDetail);
 app.post('/insertstudclssDetails',studclss_services.insertstudclssDetails);
 
+
+var teacher_services=require('../stud_api/create_teacher/services');
+
+app.get("/getteacherDetail",teacher_services.getteacherDetail);
+app.post('/insertteacherDetails',teacher_services.insertteacherDetails);
+app.post('/removeteacherDetail',teacher_services.removeteacherDetail);
+
+
 console.log("server running on 9000 port")
 
 app.listen(9000);

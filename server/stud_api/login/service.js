@@ -10,12 +10,38 @@ function insertloginDetails(req,res){
     
     var username=req.body.username;
     var password=req.body.password;
+    var al=[];
 
-    var sql = 'INSERT INTO login (username, password)VALUES("'+username+'","'+password+'")';
+    let arr=[];
+     let sql=`SELECT *FROM login`;
+    sequelize.query(sql, { type: sequelize.QueryTypes.SELECT})
+  .then(users => {
+      
+      for(let i=0;i<users.length;i++)
+            {
+                arr.push({"username":users[i].username," password":users[i].password})
+            }
+
+            
+        for(let i=0;i<arr.length;i++)
+        
+               
+               if(arr[i].username!==username)
+               {
+               console.log("user already exist");  
+               }
+               else
+               {
+                  
+                   console.log("login success");
+               }          
+        
     
+  })
+     
+  console.log(arr.length);
+
     
- 
-    sequelize.query(sql, {type: sequelize.QueryTypes.INSERT})
   } 
 
 
@@ -29,7 +55,7 @@ function getloginDetail(req,res){
        
     sequelize.query(sql, { type: sequelize.QueryTypes.SELECT})
     .then(users => {
-        let a=[];
+        
         for(let i=0;i<users.length;i++)
               {
                   a.push({"name":users[i].username," pass":users[i].password})
