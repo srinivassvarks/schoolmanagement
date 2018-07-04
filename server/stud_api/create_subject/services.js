@@ -44,23 +44,42 @@ function getsubjectDetail(req,res){
 
   function getsubjec(req,res){
 
-    let sql=`SELECT sb.subjectname from subj sb LEFT JOIN stud_clss scls ON scls.cls=sb.cls`;
- sequelize.query(sql,{ type: sequelize.QueryTypes.SELECT})
- .then(users => {
-     let a=[];
-     for(let i=0;i<users.length;i++)
-           {
-               a.push({"subjectname:":users[i].subjectname})
-           }       
-           res.send(a);
-   
- })
+    let cls=req.body.cls;
+      console.log(cls);
+    let sql=`select subjectname from subj where cls=:cls`;
+    sequelize.query(sql,{replacements: {
+        cls:cls
+    }, type: sequelize.QueryTypes.SELECT})
+    .then(users => {
+        let a=[];
+        for(let i=0;i<users.length;i++)
+              {
+                  a.push({"subjectname:":users[i].subjectname})
+              }       
+              res.send(a);
+      
+    })
+}
+
+function deletsubjec(req,res){
+
+    let cls=req.body.cls;
+      console.log(cls);
+    let sql=`delete *from subj where cls=:cls`;
+    sequelize.query(sql,{replacements: {
+        cls:cls
+    },type: sequelize.QueryTypes.DELETE})
+    .then(users => {
+              
+        res.send("Number of records deleted: " + users.affectedRows);
+    })
 }
 
   
 module.exports = {
     getsubjectDetail:getsubjectDetail,
     insertsubjectDetails:insertsubjectDetails,
+    deletsubjec:deletsubjec,
     getsubjec:getsubjec,
         poolSize: 10000,
     poolIdleTimeout: 30000000

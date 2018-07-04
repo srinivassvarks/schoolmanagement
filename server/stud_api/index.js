@@ -19,6 +19,7 @@ var sub_services=require('../stud_api/create_subject/services');
 app.get("/getsubjectDetails",sub_services.getsubjectDetail);
 app.post('/insertsubjectDetails',sub_services.insertsubjectDetails);
 app.post('/getsubject',sub_services.getsubjec);
+app.post('/deletsubject',sub_services.deletsubjec);
 
 
 
