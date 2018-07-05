@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 // Simulation Configurations
@@ -34,8 +35,8 @@ var teacher_services=require('../stud_api/create_teacher/services');
 app.get("/getteacherDetail",teacher_services.getteacherDetail);
 app.post('/insertteacherDetails',teacher_services.insertteacherDetails);
 app.post('/removeteacherDetail',teacher_services.removeteacherDetail);
-
-
+app.post("/getteacher_handlingdetail",teacher_services.getteacher_handlingdetail);
+app.post("/downloadteacher_handlingdetail",teacher_services.downloadteacher_handlingdetail);
 console.log("server running on 9000 port")
 
 app.listen(9000);

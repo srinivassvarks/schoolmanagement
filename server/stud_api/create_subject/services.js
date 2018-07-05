@@ -42,14 +42,14 @@ function getsubjectDetail(req,res){
   }
   
 
+  
+
   function getsubjec(req,res){
 
     let cls=req.body.cls;
-      console.log(cls);
+      
     let sql=`select subjectname from subj where cls=:cls`;
-    sequelize.query(sql,{replacements: {
-        cls:cls
-    }, type: sequelize.QueryTypes.SELECT})
+    sequelize.query(sql,{replacements:{cls:cls},type: sequelize.QueryTypes.SELECT})
     .then(users => {
         let a=[];
         for(let i=0;i<users.length;i++)
@@ -65,14 +65,12 @@ function deletsubjec(req,res){
 
     let cls=req.body.cls;
       console.log(cls);
-    let sql=`delete *from subj where cls=:cls`;
+    let sql=`delete from subj where cls=:cls`;
     sequelize.query(sql,{replacements: {
         cls:cls
     },type: sequelize.QueryTypes.DELETE})
-    .then(users => {
-              
-        res.send("Number of records deleted: " + users.affectedRows);
-    })
+    
+    
 }
 
   
